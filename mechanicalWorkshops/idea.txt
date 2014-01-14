@@ -1,0 +1,5 @@
+net thrower: uses  thread/cloth and machine power to throw webs (todo see if they could be uncollectable)
+    - reaction arm - auto suspend on full
+crusher: crushes items into <material> block MANY POWERZ NEEDED
+aerial faith plate: portal 2 ftw. Though more deadly in df
+dispensers: either coin operated or only mechanical, ejects items stored within (for adventure maps...)
