@@ -8,7 +8,7 @@ raws_list={"building_bulletin_board.txt","reaction_bulletin_board.txt"}
 patch_entity=[[
     [PERMITTED_BUILDING:BULLETIN_BOARD]
 ]]
-patch_init="dofile(dfhack.getDFPath()..'/mods/bulletinBoard/bulletin_board.lua')"
+patch_dofile={"bulletin_board.lua"}
 author="warmist"
 description=[[
 A mod that adds a bulletin board, that your idle

@@ -9,7 +9,7 @@ patch_entity=[[
     [PERMITTED_BUILDING:DWARVEN_GAMES_TABLE]
     [PERMITTED_BUILDING:DWARVEN_GAMES_CHAIR]
 ]]
-patch_init="dofile(dfhack.getDFPath()..'/mods/dwarvenGames/dwarven_games.lua')"
+patch_dofile={"dwarven_games.lua"}
 author="warmist"
 description=[[
 A mod that adds a game table with various games for your dwarves.

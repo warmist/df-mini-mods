@@ -1,0 +1,4 @@
+A bar that force-feeds somewhat hungry thirsty dwarves for better party experience.
+Usage: link to stockpile, then it should auto-fill from it. When party happens dwarves will walk to it and eat/drink something.
+
+Problem: attend party is a job, eating/drinking would replace that.

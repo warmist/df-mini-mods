@@ -11,7 +11,7 @@ raws_list={"building_embalmer.txt","reaction_embalm_simple.txt"}
 patch_entity=[[
     [PERMITTED_BUILDING:EMBALMER_SHOP]
 ]]
-patch_init="dofile(dfhack.getDFPath()..'/mods/embalmer/embalmer.lua')"
+patch_dofile={"embalmer.lua"}
 author="warmist"
 description=[[
 A workshop addon that fixes corpses for resurrection

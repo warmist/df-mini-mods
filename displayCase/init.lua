@@ -8,7 +8,7 @@ raws_list={"building_display_case.txt"}
 patch_entity=[[
     [PERMITTED_BUILDING:DISPLAY_CASE]
 ]]
-patch_init="dofile(dfhack.getDFPath()..'/mods/displayCase/display_case.lua')"
+patch_dofile={"display_case.lua"}
 author="warmist"
 description=[[
 A mod that adds a display case which can hold any item 

@@ -37,6 +37,10 @@ Phylactery
 ==========
 A chamber or a workshop that would resurrect dead dwarves. Be warned: evil side effects might happen.
 
+Mechanical workshops
+====================
+A collection of machine power accepting workshops.
+
 ========
 Finished
 ========
@@ -53,7 +57,3 @@ A real working steam engine. With magma engine variant.
 Display case
 ============
 A workshop with nice sidebar that displays your prized artifacts.
-
-Mechanical workshops
-====================
-A collection of machine power accepting workshops.

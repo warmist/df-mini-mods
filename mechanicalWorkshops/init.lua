@@ -9,19 +9,7 @@ patch_entity=[[
     [PERMITTED_BUILDING:DRAGON_ENGINE_W]
     [PERMITTED_BUILDING:DRAGON_ENGINE_N]
 ]]
-patch_init="dofile(dfhack.getDFPath()..'/mods/mechanicalWorkshops/mechanicalWorkshops.lua')"
-function post_install()
-    G.print("Mechanical workshops installed successfully")
-end
-function pre_install()
-    G.print("Mechanical workshops installing...")
-end
-function pre_uninstall()
-    G.print("Mechanical workshops uninstalling...")
-end
-function post_uninstall()
-    G.print("Mechanical workshops uninstalled successfully")
-end
+patch_dofile={"mechanicalWorkshops.lua"}
 author="warmist"
 description=[[
 A mechanical workshop showcase:
