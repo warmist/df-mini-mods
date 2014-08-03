@@ -4,13 +4,9 @@ local gui = require 'gui'
 local guidm = require 'gui.dwarfmode'
 local widgets =require 'gui.widgets'
 
-display_case_view = defclass(display_case_view, guidm.MenuOverlay)
-display_case_view.ATTRS={
-    wshop=DEFAULT_NIL,
-    frame_background=dfhack.pen.parse{ch=32,fg=0,bg=0}
-}
+display_case_view = defclass(display_case_view, guidm.WorkshopOverlay)
 function display_case_view:init(args)
-    self.item=self.wshop.contained_items[0].item --todo check if always the case!
+    self.item=self.workshop.contained_items[0].item --todo check if always the case!
     local item_name=dfhack.items.getDescription(self.item,0,true)
     local label_text={item_name}
     local artifact_ref=dfhack.items.getGeneralRef(self.item,df.general_ref_type.ARTIFACT)
@@ -38,36 +34,4 @@ function display_case_view:init(args)
     }
     }
 end
-
-function display_case_view:onInput(keys)
-    local allowedKeys={
-        "CURSOR_RIGHT","CURSOR_LEFT","CURSOR_UP","CURSOR_DOWN",
-        "CURSOR_UPRIGHT","CURSOR_UPLEFT","CURSOR_DOWNRIGHT","CURSOR_DOWNLEFT","CURSOR_UP_Z","CURSOR_DOWN_Z","DESTROYBUILDING"}
-    if keys.LEAVESCREEN then
-        self:dismiss()
-        self:sendInputToParent('LEAVESCREEN')
-    else
-        for _,name in ipairs(allowedKeys) do
-            if keys[name] then
-                self:sendInputToParent(name)
-                break
-            end
-        end
-        self:inputToSubviews(keys)
-    end
-    if df.global.world.selected_building ~= self.wshop then
-        self:dismiss()
-        return
-    end
-end
-
-function drawSidebar(wshop)
-    local valid_focus="dwarfmode/QueryBuilding/Some"
-    if string.sub(dfhack.gui.getCurFocus(),1,#valid_focus)==valid_focus and
-        wshop:getMaxBuildStage()==wshop:getBuildStage() 
-    then
-        local sidebar=display_case_view{wshop=wshop}
-        sidebar:show()
-    end
-end
-ev.registerSidebar("DISPLAY_CASE",drawSidebar)
+ev.registerSidebar("DISPLAY_CASE",display_case_view)
