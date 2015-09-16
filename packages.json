@@ -1,0 +1,27 @@
+[
+{
+	"name":"artifactual",
+	"desc":{
+		"short":"Special effects for artifacts",
+		"long":"This mod gives special effects to artifacts. They are dependant on artifact type and materials used"
+	},
+	"source":"www.not_existing_path.com/somepage.json",
+	"comment":"or you could use this:",
+	"files":[
+	"1","x",".png","etc..."
+	],
+	"author":"some author",
+	"version":0
+},
+{
+	"name":"artifactual",
+	"desc":{
+		"short":"Special effects for artifacts",
+		"long":"This mod gives special effects to artifacts. They are dependant on artifact type and materials used"
+	},
+	"source":"www.not_existing_path.com/other_page.json",
+	"author":"some author",
+	"version":1
+}
+]
+
