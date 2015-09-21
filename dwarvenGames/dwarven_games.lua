@@ -246,7 +246,7 @@ function addWaitJob(wshop)
         makeWaitJob(wshop,dwarfs_near[math.random(1,#dwarfs_near-1)])
     end
 end
-function waitDone( reaction,unit )
+function waitDone( reaction,reaction_product,unit )
     --check players
     --local players=getPlayers(unit.job.current_job) todo write this
     --start playing

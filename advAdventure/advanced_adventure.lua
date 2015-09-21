@@ -1,5 +1,5 @@
 local eventful=require("plugins.eventful")
-function reaction_imbue(reaction,unit,input_items,input_reagents,output_items,call_native)
+function reaction_imbue(reaction,reaction_product,unit,input_items,input_reagents,output_items,call_native)
     --printall(input_items[1])
     local figure_base=219
     local creature_base=19
@@ -49,7 +49,7 @@ function add_site(size,civ,site_type,name)
     
     require("plugins.dfusion.adv_tools").addSite(nil,nil,maxx,minx,maxy,miny,civ,name,site_type)
 end
-function reaction(reaction,unit,input_items,input_reagents,output_items,call_native)
+function reaction(reaction,reaction_product,unit,input_items,input_reagents,output_items,call_native)
     require("gui.dialogs").showInputPrompt("Site name", "Select a name for a new site:", nil,nil, dfhack.curry(add_site,1,unit.civ_id,0))
     call_native.value=false
 end

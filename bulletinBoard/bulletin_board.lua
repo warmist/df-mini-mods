@@ -254,7 +254,7 @@ function getBuildingFromJob(job)
         end
     end
 end
-function postMessageDone(reaction,unit)
+function postMessageDone(reaction,reaction_product,unit)
     local building=getBuildingFromJob(unit.job.current_job)
     print("Posted on building:"..tostring(building))
     local mngr=bulletin_board_manager{building=building}

@@ -75,7 +75,7 @@ function getBuildingFromJob(job)
     end
 end
 
-function load_webs(reaction,unit,input_items,input_reagents,output_items,call_native)
+function load_webs(reaction,reaction_product,unit,input_items,input_reagents,output_items,call_native)
     local building=getBuildingFromJob(unit.job.current_job)
     dfhack.items.moveToBuilding(input_items[0],building,0)
     call_native.value=false

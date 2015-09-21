@@ -282,7 +282,7 @@ function get_skill_rating( unit,skill_id )
         return s_entry.rating
     end
 end
-function pulpit_finish_reading(reaction,unit,input_items,input_reagents,output_items,call_native)
+function pulpit_finish_reading(reaction,reaction_product,unit,input_items,input_reagents,output_items,call_native)
     call_native.value=false
     --enum all listeners
     local listeners=enum_listeners(get_building_from_unit(unit))
