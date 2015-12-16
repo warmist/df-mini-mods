@@ -1,9 +1,0 @@
-book shelve building, collects books
-books when created will have few facts about dwarf or civ or god
-looking at bookshelve will show collected info about that (in chronological order)
-
---writing about: himself, family, civ,god(s),friends,enemies to pages
--- collect pages to book (by user)
--- collect books in bookshelves
-
-?? how to fluff it? many sentence generators?
