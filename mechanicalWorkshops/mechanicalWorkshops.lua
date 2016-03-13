@@ -1,11 +1,25 @@
 local builds=require 'plugins.building-hacks'
 local eventful= require 'plugins.eventful'
 
+
+function make_frames( gears ) -- a helper to make animation for gears
+    local ret={}
+    local frame={42,15}
+    for _,frame_pic in ipairs(frame) do
+        local nframe={}
+        for i,v in ipairs(gears) do
+            table.insert(nframe,{x=v.x,y=v.y,frame_pic,7,0,0})
+        end
+        table.insert(ret,nframe)
+    end
+    return ret
+end
+
 local dragon_engine_dirs={
-    S={gear={x=0,y=0},spew={x=0,y=5,dx=0,dy=1,mx=0,my=3}}, --spew place, direction, magma place
-    N={gear={x=0,y=4},spew={x=0,y=-1,dx=0,dy=-1,mx=0,my=1}},
-    W={gear={x=4,y=0},spew={x=-1,y=0,dx=-1,dy=0,mx=1,my=0}},
-    E={gear={x=0,y=0},spew={x=5,y=0,dx=1,dy=0,mx=3,my=0}},
+    S={spew={x=0,y=5,dx=0,dy=1,mx=0,my=3}}, --spew place, direction, magma place
+    N={spew={x=0,y=-1,dx=0,dy=-1,mx=0,my=1}},
+    W={spew={x=-1,y=0,dx=-1,dy=0,mx=1,my=0}},
+    E={spew={x=5,y=0,dx=1,dy=0,mx=3,my=0}},
     }
 function getMagma(pos)
     local flags=dfhack.maps.getTileFlags(pos)
@@ -52,15 +66,7 @@ function registerDragonEngine(dir,data)
         name="DRAGON_ENGINE_"..dir,
         fix_impassible=true,
         consume=25,
-        gears={data.gear},
-        action={50,makeSpewFire(data.spew)},
-        animate={
-            isMechanical=true,
-            frames={
-            {{x=data.gear.x,y=data.gear.y,42,7,0,0}}, --first frame, 1 changed tile
-            {{x=data.gear.x,y=data.gear.y,15,7,0,0}} -- second frame, same
-            }
-        }
+        action={50,makeSpewFire(data.spew)}
         }
     print("Registered mechanical workshop:".."DRAGON_ENGINE_"..dir)
 end
