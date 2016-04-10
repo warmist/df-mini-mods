@@ -15,6 +15,7 @@ patch_entity=[[
     [PERMITTED_BUILDING:WEBBER_N]
     [PERMITTED_BUILDING:WALL_MOVER]
     [PERMITTED_BUILDING:AUTO_FLINGER]
+    [PERMITTED_BUILDING:ITEM_SMASHER]
     [PERMITTED_REACTION:LUA_HOOK_ADD_WEBS_TO_SHOOTER]
 ]]
 patch_dofile={"mechanicalWorkshops.lua","wall_mover.lua","auto_flinger.lua"}
@@ -26,6 +27,7 @@ A mechanical workshop showcase:
  * Webber - a mechanical web thrower
  * Wall mover - moves walls
  * Auto flinger - shoots items from nearby workshops
+ * Smasher - makes blocks out of items
 NOTICE: connecting machines must be built AFTER 
 any mechanical workshop
 ]]

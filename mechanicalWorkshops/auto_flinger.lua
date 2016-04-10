@@ -162,7 +162,50 @@ builds.registerBuilding{
         }
 
 flinger_sidebar=defclass(flinger_sidebar,guidm.WorkshopOverlay)
+function get_machine( bld )
+    if bld.machine and bld.machine.machine_id>=0 then
+        return df.machine.find(bld.machine.machine_id)
+    end
+end
+function make_power_widgets(target,top) --makes a nice "like vanila" machine information
+    local m=get_machine(target)
+    if m then
+        local min=m.min_power
+        local cur=m.cur_power
+        local active_text="Innactive"
+        local active_pen=dfhack.pen.parse{fg=COLOR_LIGHTRED,bg=0}
+        if m.flags.active then
+            active_text="Active"
+            active_pen=dfhack.pen.parse{fg=COLOR_LIGHTGREEN,bg=0}
+        end
+        local function make_power_string()
+            local make,use=builds.getPower(target)
+            local power_string
 
+            if make==nil then
+                power_string="A" --TODO: not make any widget at all?
+            elseif make>0 and use>0 then
+                power_string=string.format("This Building Makes/Uses: %d/%d",make,use)
+            elseif make>0 and use==0 then
+                power_string=string.format("This Building Makes: %d",make)
+            elseif make==0 and use>0 then
+                power_string=string.format("This Building Uses: %d",use)
+            end
+            return power_string
+        end
+        
+
+        return {
+            widgets.Label{ text=active_text,text_pen=active_pen,frame={t=top,l=1} },
+            widgets.Label{ text="Total Power: "..tostring(cur), frame={t=top+1,l=1} },
+            widgets.Label{ text="Total Power Needed: "..tostring(min), frame={t=top+2,l=1} },
+            widgets.Label{ text={{text=make_power_string}}, frame={t=top+3,l=1} },
+        }
+    else
+        return {widgets.Label{ text="Not connected to machines",
+            text_pen=dfhack.pen.parse{fg=COLOR_LIGHTRED,bg=0}, frame={t=top,l=1} }}
+    end
+end
 function flinger_sidebar:init(args)
     self:update_text()
     self:addviews{
@@ -181,6 +224,7 @@ function flinger_sidebar:init(args)
         }
     }
     }
+    self:addviews(make_power_widgets(self.workshop,6))
 end
 function flinger_sidebar:add_pow()
     local d,p=get_dir_pow(self.workshop)
@@ -219,24 +263,47 @@ end
 
 eventful.registerSidebar("AUTO_FLINGER",flinger_sidebar)
 
-
-function make_auto_workshop(name,recipes,consume_power)
+function do_recipe(workshop,item,recipes)
+    if type(recipes)=="function" then
+        return recipes(workshop,item)
+    end
+    if type(recipes)=="table" then
+        for i,v in ipairs(recipes) do
+            if type(v)=="function" then
+                local p=v(workshop,item)
+                if p then
+                    return p
+                end
+            else
+                --TODO
+            end
+        end
+    end
+    return false
+end
+--[==[
+    TODO:
+        move to other file?
+        Special effects: emit clouds of materials?
+        Smasher might be too fast: dwarves take a lot longer to do the same. We should not have it TOO fast
+--]==]
+function make_auto_workshop(name,nice_name,recipes,consume_power)
+    --TODO: get nice_name from raws
     consume_power=consume_power or 20
     local function wshop_update(wshop)
         if not wshop:isUnpowered() then
             local items={}
-            for i,v in ipairs(wshops) do --not sure how it got here.. maybe some item inserted later?
-                get_items(v,items)
-            end
+
             local my_items=enum_items_in_region(wshop.x1,wshop.y1,wshop.x2,wshop.y2,wshop.z)
             --merge them in
             for k,v in pairs(my_items) do
                 table.insert(items,v)
             end
             --process one item
-
             for i,v in ipairs(items) do
-
+                if do_recipe(wshop,v,recipes) then
+                    return
+                end
             end
         end
     end
@@ -246,9 +313,61 @@ function make_auto_workshop(name,recipes,consume_power)
         consume=consume_power,
         auto_gears=true,
         action={50,wshop_update},
-        animate={
-            isMechanical=true,
-            frames=make_frames(flinger_gears)
+        }
+    --WARNING stupid code follows: i create new class for each workshop
+    -- this could be avoided but i'm too lazy and who cares, right?
+
+    local auto_workshop_gui=defclass(auto_workshop_gui,guidm.WorkshopOverlay)
+    function auto_workshop_gui:init(args)
+        self:addviews{
+        widgets.Panel{
+            subviews = {
+                widgets.Label{ text=nice_name, frame={t=1,l=1} },
+                
+                widgets.Label{ text={{key='DESTROYBUILDING',key_sep=": ",text="Remove Building"}}, frame={b=2,l=1} },
+                widgets.Label{ text={{key='LEAVESCREEN',key_sep=": ",text="Done"}}, frame={b=1,l=1} }
+            }
         }
         }
+        self:addviews(make_power_widgets(self.workshop,2))
+    end
+    eventful.registerSidebar(name,auto_workshop_gui)
 end
+
+function rock_smasher_recipe(wshop, item )
+    local BLOCK_SIZE=600
+    if item:getVolume()<= BLOCK_SIZE then --fits between teeth and just sits there. Also prevents machine from totally eating blocks
+        return false
+    end
+    --TODO: figure out if material used for teeth COMPRESSIVE strenght is > items
+    --if not damage the teeth randomly
+    --in extreme case break the machine, explosively!
+    if item:getActualMaterial()==-1 or item:getActualMaterialIndex()==-1 then --no invalid materials
+        return false
+    end
+    local volume=item:getVolume()*(math.random()*0.1+0.2) --Vanilla blocks have 0.24 efficiency, this sometimes is better
+    local count=math.floor(volume/BLOCK_SIZE)
+    
+    local function make_block()
+        local block=df.item_blocksst:new()
+
+        block.stack_size = 1
+        block.mat_type = item:getActualMaterial()
+        block.mat_index = item:getActualMaterialIndex()
+
+        block.flags.removed=true
+
+        block.id=df.global.item_next_id
+        df.global.item_next_id=df.global.item_next_id+1
+        block:categorize(true)
+        df.global.world.items.all:insert("#",block)
+        dfhack.items.moveToBuilding(block,wshop,0)
+        block.flags.in_building=false --temp fix for a bug in moveToBuilding
+    end
+    for i=1,count do
+        make_block()
+    end
+    dfhack.items.remove(item)    
+    return true
+end
+make_auto_workshop("ITEM_SMASHER","Smasher",rock_smasher_recipe,30)-- any item with volume*(0.2 to 0.3) > block volume is crushed to blocks
