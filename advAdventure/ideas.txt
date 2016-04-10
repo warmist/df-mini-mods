@@ -4,4 +4,7 @@
 * portal building (needs power)
 	* allows to teleport to FAR FAR locations
 	* uses similar markers on map (also buildings)
-
+* granades
+	* iron - less shrapnel more dmg
+	* glass - MORE shrapnel less dmg
+* glass bolts breaking into shrapnel like shotgun

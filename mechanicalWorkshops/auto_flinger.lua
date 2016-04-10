@@ -8,7 +8,44 @@ local utils=require 'utils'
 		add z level each 5/10 power
 		get items on/in this building too
 		tweak numbers?
+		add power requirement per item flinged (or trying to fling)
+			thus making players produce more power or have chance of
+			machines siezing up
+		maybe add variation in fling power to discorouge long fling distance
+		add (small?) chance that items will hit units
+			could work as improvised trap/weapon
 ]==]
+local function enum_items_in_region(min_x,min_y,max_x,max_y,z)
+	local blocks={}
+
+	for x=min_x,max_x do
+	for y=min_y,max_y do
+		local block=dfhack.maps.getTileBlock(x,y,z)
+		if block then 
+			blocks[block]=true
+		end
+	end
+	end
+	
+	local item_ids={}
+	for k,v in pairs(blocks) do
+		for i,v in ipairs(k.items) do
+			table.insert(item_ids,v)
+		end
+	end
+	local ret={}
+	for i,v in ipairs(item_ids) do
+		local item=df.item.find(v)
+		if item.pos.z==z and
+			item.pos.x>=min_x and
+			item.pos.x<=max_x and
+			item.pos.y>=min_y and
+			item.pos.y<=max_y then
+			ret[v]=item
+		end
+	end
+	return ret
+end
 local function get_create_general_ref(building)
     for k,ref in pairs(building.general_refs) do
         if ref:getType()==df.general_ref_type.LOCATION then
@@ -99,7 +136,11 @@ function flinger_update(wshop)
         for i,v in ipairs(wshops) do
         	get_items(v,items)
         end
-
+        local my_items=enum_items_in_region(wshop.x1,wshop.y1,wshop.x2,wshop.y2,wshop.z)
+        --merge them in
+        for k,v in pairs(my_items) do
+        	table.insert(items,v)
+        end
         --fling items
         for i,v in ipairs(items) do
         	v.pos={x=wshop.centerx,y=wshop.centery,z=wshop.z}

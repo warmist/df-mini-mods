@@ -47,6 +47,7 @@ function add_site(size,civ,site_type,name)
         maxy=y+size
     end
     
+    --TODO: this is removed!
     require("plugins.dfusion.adv_tools").addSite(nil,nil,maxx,minx,maxy,miny,civ,name,site_type)
 end
 function reaction(reaction,reaction_product,unit,input_items,input_reagents,output_items,call_native)
