@@ -16,7 +16,14 @@ randoms ideas:
 	arena. TO THE DEATH!
 	torture?
 	blood as fuel
-
+	failures:
+		moods for dwarves (maybe not a failure? berserk better than wasting away)
+		various evil mists (or just miasma everywhere)
+		explosions!
+		undeads (could be hard to do)
+	vein creation: create stone/metal veins using dark magics
+		failure modes include creating unminable rocks
+	
 darker yet:
 	artifial cariers of unholy blood
 	brains in jars
@@ -29,4 +36,6 @@ darker yet:
 		alloys?
 		ghost-like things? - wraights
 		shards (needed for high level magics)?
+
+
 	lazarus chamber- resurrects fallen dwarf that it is bound to
