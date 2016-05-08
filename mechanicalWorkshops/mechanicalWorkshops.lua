@@ -47,13 +47,10 @@ function makeSpewFire(spew)
                     flowType=df.flow_type.Dragonfire
                     local flow=dfhack.maps.spawnFlow(sPos,flowType,6,-1,120*amount/7)
                     flow.dest={x=sPos.x+spew.dx*5,y=sPos.y+spew.dy*5,z=sPos.z}
-                    
                 else
-                    
                     for i=0,math.ceil(amount/1.3) do
                         dfhack.maps.spawnFlow({x=sPos.x+spew.dx*i,y=sPos.y+spew.dy*i,z=sPos.z},df.flow_type.Mist,6,-1,120*(amount-i)/7)
                     end
-                    
                 end
                 --consume the liquid
                 removeLiquid(mPos)
