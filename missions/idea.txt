@@ -11,3 +11,6 @@
 3. military instalation
     a. build military barracks
     b. train population
+4. misc
+	a. MINE EVERYTHING (well only veins)
+	
