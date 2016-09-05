@@ -21,4 +21,4 @@ other ideas:
     a workshop that creates a vein: maybe arming it would involve adding boulders (X boulders for X tiles to fill)
     boosting the tree/plant growth: quick way to tree farm! (misfire: spawn a berserk ent?)
     teleportation machine
-    
+    magma infuser: a machine that forces magma into a small singularity. This then can be built as an explosive that when ruptures creates a random material vein(s). Small chance to create unminable materials. Very small chance to create new materials
