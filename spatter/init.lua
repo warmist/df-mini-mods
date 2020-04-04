@@ -19,7 +19,6 @@ patch_files={
 }
 author="angavrilov"
 description=[[
-This mod adds a way to coat weapons with 
-poisons at 'Greasing station'
+This mod adds a way to coat weapons with poisons at 'Greasing station'
 ]]
 return _ENV

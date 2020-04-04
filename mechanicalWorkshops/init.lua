@@ -22,13 +22,11 @@ patch_dofile={"mechanicalWorkshops.lua","wall_mover.lua","auto_flinger.lua"}
 author="warmist"
 description=[[
 A mechanical workshop showcase:
- * Dragon engines - lava using, dragon breath 
-        shooting machines
+ * Dragon engines - lava using, dragon breath shooting machines
  * Webber - a mechanical web thrower
  * Wall mover - moves walls
  * Auto flinger - shoots items from nearby workshops
  * Smasher - makes blocks out of items
-NOTICE: connecting machines must be built AFTER 
-any mechanical workshop
+NOTICE: connecting machines must be built AFTER any mechanical workshop
 ]]
 return _ENV

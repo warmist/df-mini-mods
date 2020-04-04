@@ -11,7 +11,6 @@ patch_entity=[[
 patch_dofile={"bulletin_board.lua"}
 author="warmist"
 description=[[
-A mod that adds a bulletin board, that your idle
-dwarves will post thoughts, preferences, etc...
+A mod that adds a bulletin board, that your idle dwarves will post thoughts, preferences, etc...
 ]]
 return _ENV

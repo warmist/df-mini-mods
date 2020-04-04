@@ -11,7 +11,6 @@ patch_entity=[[
 patch_dofile={"display_case.lua"}
 author="warmist"
 description=[[
-A mod that adds a display case which can hold any item 
-and has a custom query screen.
+A mod that adds a display case which can hold any item and has a custom query screen.
 ]]
 return _ENV

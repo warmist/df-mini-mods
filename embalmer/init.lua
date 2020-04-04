@@ -14,7 +14,6 @@ patch_entity=[[
 patch_dofile={"embalmer.lua"}
 author="warmist"
 description=[[
-A workshop addon that fixes corpses for resurrection
-or a nice burial.
+A workshop addon that fixes corpses for resurrection or a nice burial.
 ]]
 return _ENV

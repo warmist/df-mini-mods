@@ -11,9 +11,7 @@ patch_entity=[[
 ]]
 author="angavrilov"
 description=[[
-Adds working steam engines. One powered by magma, one
-by fuel. Both need water to function.
-NOTICE: connecting machines must be built AFTER 
-steam engine
+Adds working steam engines. One powered by magma, one by fuel. Both need water to function.
+NOTICE: connecting machines must be built AFTER steam engine
 ]]
 return _ENV

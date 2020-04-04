@@ -13,8 +13,6 @@ patch_entity=[[
 patch_dofile={"personal_buildings.lua"}
 author="warmist"
 description=[[
-A mod that adds personal buildings that
-can only be used by dwarves that own
-that building.
+A mod that adds personal buildings that can only be used by dwarves that own that building.
 ]]
 return _ENV

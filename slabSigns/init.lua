@@ -12,7 +12,6 @@ patch_entity=[[
 patch_dofile={"slab_sign.lua"}
 author="warmist"
 description=[[
-A mod that adds a slab sign with nice sidebar
-view
+A mod that adds a slab sign with nice sidebar view
 ]]
 return _ENV
